@@ -1,0 +1,47 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+
+class Solution {
+    public boolean hasCycle(ListNode head) {
+        boolean solution = false;
+        ListNode curr = head;
+        while (curr != null) {
+            if (curr.val < -1000) {
+                solution = true;
+                break;
+            }
+            curr.val -= 10000;
+            curr = curr.next;
+        }
+        curr = head;
+        while (curr != null && curr.val < -1000) {
+            curr.val += 10000;
+        }
+        return solution;
+
+        /*
+        if (head == null) return false;
+
+        ListNode slowNode = head;
+        ListNode fastNode = head;
+
+        while(fastNode != null && fastNode.next != null) {
+            slowNode = slowNode.next;
+            fastNode = fastNode.next.next;
+
+            if (slowNode == fastNode) {
+                return true;
+            }
+        }
+        return false;
+        */
+    }
+}
